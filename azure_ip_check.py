@@ -3,7 +3,6 @@ import json
 import sys
 import getopt
 
-
 def check_network(json_file,ip):
 	fich_ips = open(json_file,'r')
 	Azure_ip = json.loads(fich_ips.read())
@@ -12,16 +11,11 @@ def check_network(json_file,ip):
 	result = ['']
 
 	for i in Azure_ip['values']:
-		#print(i['name'])
-		#print(i['properties']['addressPrefixes'])
 		for j in i['properties']['addressPrefixes']:
-
 			if ipaddress.ip_address(check) in ipaddress.ip_network(j):
 				result.append('IP: ' + check + ' -> NET: ' + j + ', ID: ' + i['name'] + ', REGION: ' + i['properties']['region'])
 				break
-
 	return(result)
-
 
 def usage():
 	print("Command usage:")
@@ -35,7 +29,6 @@ def main():
 	try:
 	    opts, args = getopt.getopt(sys.argv[1:], "hf:i:", ["file=", "ipaddress="])
 	except getopt.GetoptError as err:
-	    # print help information and exit:
 	    print(err)  # will print something like "option -a not recognized"
 	    usage()
 	    sys.exit(2)
@@ -52,7 +45,7 @@ def main():
 	    else:
 	        assert False, "unhandled option"
 	        exit
-	#print("Parametros 1: %s 2: %s" % (inputfile,ipaddr))
+
 	if inputfile != "" and ipaddr != "":
 		results=check_network(inputfile,ipaddr)
 	else:
@@ -63,8 +56,6 @@ def main():
 	else:
 		for i in results:
 			print(i)
-
-
 
 if __name__== "__main__":
 	main()
