@@ -28,7 +28,7 @@ def replacement(match, d, group=1):
 def decode_file(varname,dic,text):
     result=""
     new = build_dict(varname,dic)
-    re_string="\%(" + varname + ":\~\d+,1)\%"
+    re_string=r'\%(' + varname + r':\~\d+,1)\%'
     text=re.sub(re_string,lambda x: replacement(x, new),text)
     # Clean the text from non defined variables with non-ascii characters
     var=re.compile(r"\%.*?\%")
@@ -43,6 +43,7 @@ def decode_file(varname,dic,text):
 def check_file(filename):
     FILE = filename
     varname_1=""
+    result=""
     dict_values=""
 
     f = open(FILE, "r")
@@ -55,10 +56,11 @@ def check_file(filename):
         dict_values=array[0][1]
         file_text=f.read()
         text_d=decode_file(varname_1,dict_values,file_text)
-        print(text_d)
+        result=text_d
     else:
-        print("Not the right file type")
+        result="Not the right file type"
 
+    return result
 def usage():
 	print("Command usage:")
 	print()
@@ -87,15 +89,11 @@ def main():
 			exit
 
 	if inputfile != "":
-		results=decode_file(inputfile)
+		results=check_file(inputfile)
 	else:
 		usage()
 
-	if len(results) == 1:
-		print("Not found")
-	else:
-		for i in results:
-			print(i)
+	print(results)
 
 if __name__== "__main__":
 	main()
