@@ -1,11 +1,6 @@
 # Tools
-Tools
+These are tools I developed for myself, code could be messy but most of the time it works. If they are useful or could help someone along the way, all the better.
 
-## ip_find.py 
-Check if an IP address belongs to one of the Azure network ranges. Just download the **json** from: https://www.microsoft.com/en-us/download/details.aspx?id=56519
-```
-ip_find.py -f <inputfile> -i <ip_address>
-```
 ## decode_batch.py 
 Decodes obfuscated **.bat** files used by a new malware. These files use a simple character array substitution and empty variables obfuscation. This script extracts the original .bat script.
 The format of the files is something like this:
@@ -20,4 +15,10 @@ The format of the files is something like this:
 Usage:
 ```
 decode_batch.py -f <inputfile>
+```
+
+## ip_find.py 
+Check if an IP address belongs to one of the Azure network ranges. Just download the **json** from: https://www.microsoft.com/en-us/download/details.aspx?id=56519
+```
+ip_find.py -f <inputfile> -i <ip_address>
 ```
