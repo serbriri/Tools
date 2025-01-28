@@ -2,8 +2,8 @@
 These are tools I developed for myself, code could be messy but most of the time it works. If they are useful or could help someone along the way, all the better.
 
 ## decode_batch.py 
-Decodes obfuscated **.bat** files used by a new malware. These files use a simple character array substitution and empty variables obfuscation. This script extracts the original .bat script.
-The format of the files is something like this:
+Decodes obfuscated **.bat** files used by a new malware. These files use a simple character array substitution and empty variables obfuscation. This script extracts the original .bat script without executing it.
+The format of the obfuscated files is something like this:
 ```
 ÿþ&@cls&@set "ÃÃ§¡=3aQBGDRprYNqscPt u7ZdkCWgLFhEjmobiy5I8OnvT1lw6M0X@AVJx9U24zKfHSe"
 
