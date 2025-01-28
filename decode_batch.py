@@ -1,10 +1,11 @@
+# Imports and utility functions
 import re
 import sys
 import getopt
 
+# Identifier of the substitution variable
 idstr="@cls&@set"
 
-# Imports and utility functions
 # Build dictionary based on the substitution variable
 def build_dict(varname,value):
     res={}
@@ -15,10 +16,11 @@ def build_dict(varname,value):
         count+=1
     return res
 
+# Check if string is ascii
 def is_ascii(s):
     return all(ord(c) < 128 for c in s)
 
-# Function for the substition of the characters
+# Substition of the characters
 def replacement(match, d, group=1):
     for key in d:
         if re.match(key, match.group(group)):
@@ -30,6 +32,7 @@ def decode_file(varname,dic,text):
     new = build_dict(varname,dic)
     re_string=r'\%(' + varname + r':\~\d+,1)\%'
     text=re.sub(re_string,lambda x: replacement(x, new),text)
+
     # Clean the text from non defined variables with non-ascii characters
     var=re.compile(r"\%.*?\%")
     for i in var.findall(text):
@@ -38,8 +41,8 @@ def decode_file(varname,dic,text):
         else:
             pass
     return text
-# Open file and check is expected type
 
+# Open file, check is expected type and decode
 def check_file(filename):
     FILE = filename
     varname_1=""
@@ -61,11 +64,14 @@ def check_file(filename):
         result="Not the right file type"
 
     return result
+
+# Show usage 
 def usage():
 	print("Command usage:")
 	print()
 	print("decode_bat.py -f <inputfile>")
 
+# Main
 def main():
 	inputfile = ""
 	ipaddr = ""
